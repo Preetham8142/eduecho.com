@@ -69,15 +69,26 @@
 
 <script>
   document.getElementById("loginForm").addEventListener("submit", function (e) {
-    e.preventDefault();
+    e.preventDefault(); // Prevent form submission to server
+
+    console.log("Form submitted!"); // Debugging log to check if the form is being submitted
 
     const userType = document.getElementById("userType").value;
     const userId = document.getElementById("userId").value.trim();
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value;
 
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+    // Log the values for debugging
+    console.log("User Type: ", userType);
+    console.log("User ID: ", userId);
+    console.log("Username: ", username);
+    console.log("Password: ", password);
 
+    // Retrieve stored users from localStorage
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    console.log("Stored Users: ", users); // Debugging log to see stored users
+
+    // Check if the user exists in the stored users
     const user = users.find(u =>
       u.userType === userType &&
       u.userId === userId &&
@@ -86,10 +97,12 @@
     );
 
     if (user) {
+      // If user is found, display success message and redirect
       document.getElementById("msg").style.color = "green";
       document.getElementById("msg").textContent = "Login successful! Redirecting...";
       setTimeout(() => window.location.href = "index.html", 2000);
     } else {
+      // If user is not found, display error message
       document.getElementById("msg").style.color = "red";
       document.getElementById("msg").textContent = "Invalid credentials. Please try again.";
     }
