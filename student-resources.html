@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Resources - College Blog & Forum</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+    }
+
+    header {
+      background-color: #343a40;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.5rem 1rem;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    .back-btn:hover {
+      background: #0056b3;
+    }
+
+    .upload-section {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: 5px;
+    }
+
+    input[type="file"] {
+      padding: 0.5rem;
+      margin-right: 1rem;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .uploaded-files {
+      margin-top: 1rem;
+      padding-left: 1rem;
+    }
+
+    .uploaded-files li {
+      margin-bottom: 0.5rem;
+      list-style-type: none;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>📚 Student Resources</h1>
+</header>
+
+<div class="container">
+  <a href="student.html" class="back-btn">⬅ Back to Student Zone</a>
+
+  <div class="upload-section">
+    <h3>Upload Student Resources (Notes, Study Material, etc.):</h3>
+    <input type="file" id="student-resources" multiple />
+    <button onclick="uploadResources()">Upload</button>
+
+    <ul id="student-resources-list" class="uploaded-files"></ul>
+  </div>
+</div>
+
+<script>
+  function uploadResources() {
+    const input = document.getElementById('student-resources');
+    const files = input.files;
+    const fileList = document.getElementById('student-resources-list');
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const listItem = document.createElement('li');
+      listItem.textContent = file.name;
+      fileList.appendChild(listItem);
+    }
+  }
+</script>
+
+</body>
+</html>

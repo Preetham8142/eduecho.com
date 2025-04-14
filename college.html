@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>College Portal - College Blog & Forum</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+    }
+
+    header {
+      background-color: #343a40;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.5rem 1rem;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    .back-btn:hover {
+      background: #0056b3;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      color: #343a40;
+    }
+
+    .section-content {
+      background: #ffffff;
+      padding: 1.5rem;
+      margin-top: 1rem;
+      border-radius: 5px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .faq-section,
+    .events-section {
+      margin-top: 2rem;
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 5px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .faq-question,
+    .event {
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+    }
+
+    .faq-question h4,
+    .event h4 {
+      margin: 0;
+    }
+
+    .delete-btn,
+    .event-delete-btn {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+
+    .delete-btn:hover,
+    .event-delete-btn:hover {
+      background: #c82333;
+    }
+
+    .form-section {
+      margin-top: 1rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button[type="submit"] {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🏫 College Portal</h1>
+</header>
+
+<div class="container">
+  <a href="index.html" class="back-btn">⬅ Back to Home</a>
+
+  <div class="section-content">
+    <h2 class="section-title">College Information</h2>
+    <p>Welcome to our college portal! Here, you can find resources and information about campus life, student events, and much more.</p>
+    <p>Our college provides top-notch education, with highly qualified faculty and modern facilities that help students excel academically. Our mission is to provide a well-rounded education that helps students develop both intellectually and socially.</p>
+  </div>
+
+  <!-- Upcoming Events -->
+  <div class="events-section">
+    <h2 class="section-title">Upcoming Events</h2>
+    <div id="events-list"></div>
+
+    <div class="form-section">
+      <h3>Add New Event</h3>
+      <form id="event-form">
+        <input type="text" id="event-title" placeholder="Event Title" required />
+        <input type="date" id="event-date" required />
+        <textarea id="event-description" placeholder="Event Description" required></textarea>
+        <button type="submit">Add Event</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FAQs -->
+  <div class="faq-section">
+    <h2 class="section-title">College FAQs</h2>
+    <div id="faq-list"></div>
+
+    <div class="form-section">
+      <h3>Add New FAQ</h3>
+      <form id="faq-form">
+        <input type="text" id="faq-question" placeholder="Question" required />
+        <textarea id="faq-answer" placeholder="Answer" required></textarea>
+        <button type="submit">Add FAQ</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  let events = JSON.parse(localStorage.getItem("collegeEvents")) || [
+    {
+      title: "Annual Sports Meet",
+      date: "2025-05-20",
+      description: "Join us for a day full of sports activities and team-building events."
+    },
+    {
+      title: "Cultural Fest 2025",
+      date: "2025-06-15",
+      description: "Our annual cultural fest features music, dance performances, and artistic showcases."
+    }
+  ];
+
+  let faqs = JSON.parse(localStorage.getItem("collegeFaqs")) || [
+    {
+      question: "What is the campus dress code?",
+      answer: "Our campus has a smart casual dress code for all students."
+    },
+    {
+      question: "How can I get involved in student organizations?",
+      answer: "Join any club or society during our student orientation programs."
+    }
+  ];
+
+  function saveData() {
+    localStorage.setItem("collegeEvents", JSON.stringify(events));
+    localStorage.setItem("collegeFaqs", JSON.stringify(faqs));
+  }
+
+  function renderEvents() {
+    const eventsList = document.getElementById("events-list");
+    eventsList.innerHTML = '';
+    events.forEach((event, index) => {
+      const div = document.createElement("div");
+      div.className = "event";
+      div.innerHTML = `
+        <h4>${event.title}</h4>
+        <p><strong>Date:</strong> ${event.date}</p>
+        <p>${event.description}</p>
+        <button class="event-delete-btn" onclick="deleteEvent(${index})">Delete Event</button>
+      `;
+      eventsList.appendChild(div);
+    });
+  }
+
+  function renderFAQs() {
+    const faqList = document.getElementById("faq-list");
+    faqList.innerHTML = '';
+    faqs.forEach((faq, index) => {
+      const div = document.createElement("div");
+      div.className = "faq-question";
+      div.innerHTML = `
+        <h4>${faq.question}</h4>
+        <p>${faq.answer}</p>
+        <button class="delete-btn" onclick="deleteFAQ(${index})">Delete FAQ</button>
+      `;
+      faqList.appendChild(div);
+    });
+  }
+
+  function deleteEvent(index) {
+    events.splice(index, 1);
+    saveData();
+    renderEvents();
+  }
+
+  function deleteFAQ(index) {
+    faqs.splice(index, 1);
+    saveData();
+    renderFAQs();
+  }
+
+  document.getElementById("event-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const title = document.getElementById("event-title").value;
+    const date = document.getElementById("event-date").value;
+    const description = document.getElementById("event-description").value;
+    events.push({ title, date, description });
+    saveData();
+    renderEvents();
+    this.reset();
+  });
+
+  document.getElementById("faq-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const question = document.getElementById("faq-question").value;
+    const answer = document.getElementById("faq-answer").value;
+    faqs.push({ question, answer });
+    saveData();
+    renderFAQs();
+    this.reset();
+  });
+
+  // Initial load
+  renderEvents();
+  renderFAQs();
+</script>
+
+</body>
+</html>

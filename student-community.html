@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Community</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+    }
+
+    header {
+      background-color: #343a40;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .login-form {
+      text-align: center;
+      margin-top: 5rem;
+    }
+
+    .login-form input {
+      width: 80%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .login-form button {
+      padding: 0.75rem 1rem;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .chat-section {
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .messages {
+      max-height: 300px;
+      overflow-y: auto;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+    }
+
+    .message {
+      margin-bottom: 0.75rem;
+      background: #f8f9fa;
+      padding: 0.5rem;
+      border-radius: 5px;
+      position: relative;
+    }
+
+    .message .timestamp {
+      font-size: 0.8rem;
+      color: gray;
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 2px 6px;
+      cursor: pointer;
+    }
+
+    input[type="text"], input[type="password"] {
+      padding: 0.75rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 0.75rem 1rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>💬 Student Community</h1>
+</header>
+
+<div class="container" id="login-container">
+  <div class="login-form">
+    <h2>Login</h2>
+    <input type="text" id="student-name" placeholder="Enter your name"><br>
+    <input type="password" id="student-password" placeholder="Enter your password"><br>
+    <button onclick="login()">Login</button>
+  </div>
+</div>
+
+<div class="container" id="chat-container" style="display: none;">
+  <div class="chat-section">
+    <h3>Welcome, <span id="student-name-display"></span>!</h3>
+    <div class="messages" id="message-list"></div>
+    <div class="input-group">
+      <input type="text" id="message-input" placeholder="Type a message...">
+      <button onclick="postMessage()">Send</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  let users = JSON.parse(localStorage.getItem('users')) || {};
+  let messages = JSON.parse(localStorage.getItem('messages')) || [];
+
+  function login() {
+    const name = document.getElementById('student-name').value.trim();
+    const password = document.getElementById('student-password').value.trim();
+
+    if (!name || !password) {
+      alert('Please enter name and password.');
+      return;
+    }
+
+    // Register new user if not exists
+    if (!users[name]) {
+      users[name] = password;
+    } else if (users[name] !== password) {
+      alert('Incorrect password!');
+      return;
+    }
+
+    // Save logged-in user
+    currentUser = { name, password };
+    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+    localStorage.setItem('users', JSON.stringify(users));
+
+    showChat();
+  }
+
+  function showChat() {
+    document.getElementById('login-container').style.display = 'none';
+    document.getElementById('chat-container').style.display = 'block';
+    document.getElementById('student-name-display').innerText = currentUser.name;
+    renderMessages();
+  }
+
+  function renderMessages() {
+    const list = document.getElementById('message-list');
+    list.innerHTML = '';
+
+    messages.forEach((msg, index) => {
+      const div = document.createElement('div');
+      div.className = 'message';
+      div.innerHTML = `<strong>${msg.user}:</strong> ${msg.text} <span class="timestamp">[${msg.timestamp}]</span>`;
+
+      if (msg.user === currentUser.name) {
+        const delBtn = document.createElement('button');
+        delBtn.className = 'delete-btn';
+        delBtn.innerText = 'X';
+        delBtn.onclick = () => deleteMessage(index);
+        div.appendChild(delBtn);
+      }
+
+      list.appendChild(div);
+    });
+
+    list.scrollTop = list.scrollHeight;
+  }
+
+  function postMessage() {
+    const input = document.getElementById('message-input');
+    const text = input.value.trim();
+    if (!text) return;
+
+    messages.push({
+      user: currentUser.name,
+      text,
+      timestamp: new Date().toLocaleString()
+    });
+
+    localStorage.setItem('messages', JSON.stringify(messages));
+    input.value = '';
+    renderMessages();
+  }
+
+  function deleteMessage(index) {
+    if (messages[index].user === currentUser.name) {
+      messages.splice(index, 1);
+      localStorage.setItem('messages', JSON.stringify(messages));
+      renderMessages();
+    }
+  }
+
+  // Auto-login if user already in localStorage
+  if (currentUser && users[currentUser.name] === currentUser.password) {
+    showChat();
+  }
+</script>
+
+</body>
+</html>

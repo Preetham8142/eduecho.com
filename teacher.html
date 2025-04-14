@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Teacher Portal - College Blog & Forum</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+    }
+
+    header {
+      background-color: #343a40;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.5rem 1rem;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    .back-btn:hover {
+      background: #0056b3;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      color: #343a40;
+    }
+
+    .section-content {
+      background: #ffffff;
+      padding: 1.5rem;
+      margin-top: 1rem;
+      border-radius: 5px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .upload-form {
+      margin-top: 1rem;
+    }
+
+    .upload-form input,
+    .upload-form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .upload-form button {
+      padding: 0.75rem 1rem;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .upload-form button:hover {
+      background: #0056b3;
+    }
+
+    .qa-section {
+      margin-top: 2rem;
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 5px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .question {
+      margin-bottom: 1rem;
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 5px;
+    }
+
+    .question h4 {
+      margin: 0 0 0.5rem;
+    }
+
+    .question .reply-btn,
+    .question .mark-answered-btn,
+    .question .delete-reply-btn {
+      margin-left: 10px;
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .question .delete-reply-btn {
+      background: #dc3545;
+    }
+
+    .question .mark-answered-btn {
+      background: #ffc107;
+      color: black;
+    }
+
+    .question .reply-btn:hover,
+    .question .mark-answered-btn:hover,
+    .question .delete-reply-btn:hover {
+      opacity: 0.9;
+    }
+
+    .question .replies {
+      margin-top: 1rem;
+      padding-left: 1rem;
+      border-left: 2px solid #ddd;
+    }
+
+    .reply-input {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .reply-input input {
+      flex: 1;
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .reply-input button {
+      padding: 0.5rem 1rem;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .reply-input button:hover {
+      background: #0056b3;
+    }
+
+    /* Media Display Section */
+    .media-display {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .media-display img,
+    .media-display video {
+      max-width: 300px;
+      border-radius: 5px;
+    }
+
+    /* NEW: Ask a Question Styling */
+    .ask-question textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      resize: vertical;
+    }
+
+    .ask-question button {
+      padding: 0.6rem 1.2rem;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .ask-question button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>👨‍🏫 Teacher Portal</h1>
+</header>
+
+<div class="container">
+  <a href="index.html" class="back-btn">⬅ Back to Home</a>
+
+  <!-- Teaching Resources Section -->
+  <div class="section-content">
+    <h2 class="section-title">Upload Teaching Resources</h2>
+    <form class="upload-form">
+      <input type="text" id="resource-title" placeholder="Enter the title of the resource" />
+      <textarea id="resource-description" placeholder="Enter a brief description of the resource"></textarea>
+      <input type="file" id="resource-file" multiple />
+      <button type="button" onclick="uploadResource()">Upload Resource</button>
+    </form>
+
+    <div id="media-display" class="media-display">
+      <!-- Uploaded media like images, videos will be displayed here -->
+    </div>
+  </div>
+
+  <!-- Student Questions Section -->
+  <div class="qa-section">
+    <h2 class="section-title">Student Questions</h2>
+
+    <!-- Ask a Question Form -->
+    <div class="ask-question upload-form">
+      <textarea id="new-question-text" placeholder="Ask a question to the teacher..."></textarea>
+      <button onclick="askQuestion()">Submit Question</button>
+    </div>
+
+    <div id="questions-container">
+      <!-- Questions will be dynamically added here -->
+    </div>
+  </div>
+</div>
+
+<script>
+  let questions = JSON.parse(localStorage.getItem('questions')) || [
+    {
+      text: "What are the best resources to prepare for the mid-term exams?",
+      replies: ["You can refer to the notes from previous years and practice past year papers."],
+      answered: false
+    },
+    {
+      text: "Can anyone suggest a good study timetable for the semester?",
+      replies: ["A good timetable includes regular breaks and revision sessions. Try to divide your time equally among all subjects."],
+      answered: false
+    }
+  ];
+
+  function renderQuestions() {
+    const container = document.getElementById('questions-container');
+    container.innerHTML = '';
+    questions.forEach((q, i) => {
+      const div = document.createElement('div');
+      div.className = 'question';
+      div.innerHTML = `
+        <h4>${q.text}</h4>
+        <button class="reply-btn" onclick="toggleReply(${i})">Reply</button>
+        <button class="mark-answered-btn" onclick="markAsAnswered(${i})">
+          ${q.answered ? 'Mark as Unanswered' : 'Mark as Answered'}
+        </button>
+        <div class="replies" id="replies-${i}">
+          ${q.replies.map((r, j) => `
+            <div class="reply">${r}
+              <button class="delete-reply-btn" onclick="deleteReply(${i}, ${j})">Delete</button>
+            </div>
+          `).join('')}
+        </div>
+        <div class="reply-input" id="reply-input-${i}" style="display: none;">
+          <input type="text" id="reply-text-${i}" placeholder="Write your reply...">
+          <button onclick="addReply(${i})">Submit</button>
+        </div>
+      `;
+      container.appendChild(div);
+    });
+  }
+
+  function toggleReply(i) {
+    const box = document.getElementById(`reply-input-${i}`);
+    box.style.display = box.style.display === 'none' ? 'flex' : 'none';
+  }
+
+  function addReply(i) {
+    const input = document.getElementById(`reply-text-${i}`);
+    if (input.value.trim()) {
+      questions[i].replies.push(input.value.trim());
+      input.value = '';
+      saveQuestions();
+      renderQuestions();
+    }
+  }
+
+  function deleteReply(i, j) {
+    questions[i].replies.splice(j, 1);
+    saveQuestions();
+    renderQuestions();
+  }
+
+  function markAsAnswered(i) {
+    questions[i].answered = !questions[i].answered;
+    saveQuestions();
+    renderQuestions();
+  }
+
+  function askQuestion() {
+    const text = document.getElementById('new-question-text').value.trim();
+    if (text) {
+      questions.unshift({ text, replies: [], answered: false });
+      document.getElementById('new-question-text').value = '';
+      saveQuestions();
+      renderQuestions();
+    } else {
+      alert("Please write a question before submitting.");
+    }
+  }
+
+  function saveQuestions() {
+    localStorage.setItem('questions', JSON.stringify(questions));
+  }
+
+  function uploadResource() {
+    const title = document.getElementById('resource-title').value;
+    const desc = document.getElementById('resource-description').value;
+    const files = document.getElementById('resource-file').files;
+    if (title && desc && files.length > 0) {
+      const media = document.getElementById('media-display');
+      for (const file of files) {
+        const url = URL.createObjectURL(file);
+        const type = file.type.split('/')[0];
+        if (type === 'image') {
+          const img = document.createElement('img');
+          img.src = url;
+          img.alt = file.name;
+          media.appendChild(img);
+        } else if (type === 'video') {
+          const video = document.createElement('video');
+          video.src = url;
+          video.controls = true;
+          media.appendChild(video);
+        }
+      }
+      alert('Teaching Resource uploaded successfully!');
+      document.getElementById('resource-title').value = '';
+      document.getElementById('resource-description').value = '';
+      document.getElementById('resource-file').value = '';
+    } else {
+      alert('Please fill all the fields and select at least one file.');
+    }
+  }
+
+  renderQuestions();
+</script>
+
+</body>
+</html>

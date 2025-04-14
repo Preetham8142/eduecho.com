@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Campus Life - College Blog & Forum</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+    }
+
+    header {
+      background-color: #343a40;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.5rem 1rem;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    .back-btn:hover {
+      background: #0056b3;
+    }
+
+    .chat-section {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .messages {
+      max-height: 300px;
+      overflow-y: auto;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .message {
+      margin-bottom: 0.75rem;
+      padding: 0.5rem;
+      background: #f8f9fa;
+      border-radius: 5px;
+    }
+
+    .message span {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+
+    .message .timestamp {
+      font-size: 0.8rem;
+      color: gray;
+    }
+
+    input[type="text"] {
+      width: 80%;
+      padding: 0.75rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-right: 1rem;
+    }
+
+    button {
+      padding: 0.75rem 1rem;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .campus-info {
+      background: #ffffff;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      border-radius: 5px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .campus-info h2 {
+      font-size: 1.5rem;
+      color: #343a40;
+    }
+
+    .campus-info p {
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .campus-info ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .campus-info ul li {
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+    }
+
+    .qa-section {
+      margin-top: 2rem;
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 5px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .question {
+      margin-bottom: 1rem;
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 5px;
+    }
+
+    .question h4 {
+      margin: 0;
+    }
+
+    .question .delete-btn, .question .reply-btn {
+      margin-left: 10px;
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .question .delete-btn:hover, .question .reply-btn:hover {
+      background: #c82333;
+    }
+
+    .replies {
+      margin-top: 1rem;
+      padding-left: 1rem;
+      border-left: 2px solid #ddd;
+    }
+
+    .reply-input {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .reply-input input {
+      flex: 1;
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .reply-input button {
+      padding: 0.5rem 1rem;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .reply-input button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🎉 Campus Life</h1>
+</header>
+
+<div class="container">
+  <a href="student.html" class="back-btn">⬅ Back to Student Zone</a>
+
+  <!-- Campus Life Information -->
+  <div class="campus-info">
+    <h2>Welcome to Campus Life!</h2>
+    <p>Our campus is a hub of vibrant activities, opportunities for growth, and diverse experiences. Here, students engage in numerous activities, from academic excellence to social interactions, all of which contribute to a balanced and fulfilling college life. Here's a glimpse of life on campus:</p>
+
+    <h3>Things to Do on Campus</h3>
+    <ul>
+      <li><strong>Join Student Clubs:</strong> Participate in various student-run clubs and organizations that focus on everything from sports to the arts.</li>
+      <li><strong>Attend Campus Events:</strong> Throughout the year, our campus hosts various events such as music festivals, sports tournaments, and academic conferences.</li>
+      <li><strong>Get Involved in Volunteering:</strong> Many students take part in community outreach programs that aim to give back to the local community.</li>
+      <li><strong>Enjoy the Campus Cafeteria:</strong> Our campus has a variety of food options, including healthy meals, snacks, and beverages to keep you energized throughout the day.</li>
+      <li><strong>Sports and Fitness:</strong> Whether you’re into competitive sports or just want to stay fit, our campus has a state-of-the-art gym and sports facilities for everyone.</li>
+    </ul>
+
+    <h3>Campus Amenities</h3>
+    <ul>
+      <li><strong>Library:</strong> A large, modern library equipped with the latest resources, study spaces, and computers.</li>
+      <li><strong>Cafeteria:</strong> A student-friendly cafeteria offering a wide variety of meals, snacks, and beverages.</li>
+      <li><strong>Health Center:</strong> On-campus healthcare facilities to assist students with medical needs.</li>
+      <li><strong>Wi-Fi:</strong> Free Wi-Fi throughout the campus for easy access to online resources and communication.</li>
+    </ul>
+  </div>
+
+  <!-- Question and Answer Section -->
+  <div class="qa-section">
+    <h2>Campus Life Q&A</h2>
+
+    <!-- Existing Questions -->
+    <div id="questions-container">
+      <!-- Questions will be dynamically added here -->
+    </div>
+
+    <!-- Ask a New Question -->
+    <h3>Ask a Question:</h3>
+    <input type="text" id="new-question" placeholder="Ask a question about campus life..." />
+    <button onclick="askQuestion()">Ask</button>
+  </div>
+</div>
+
+<script>
+  let questions = [];
+
+  function renderQuestions() {
+    const questionsContainer = document.getElementById('questions-container');
+    questionsContainer.innerHTML = '';
+
+    questions.forEach((q, index) => {
+      const questionDiv = document.createElement('div');
+      questionDiv.className = 'question';
+      questionDiv.innerHTML = `
+        <h4>${q.text}</h4>
+        <button class="delete-btn" onclick="deleteQuestion(${index})">Delete Question</button>
+        <button class="reply-btn" onclick="toggleReply(${index})">Reply</button>
+        <div class="replies" id="replies-${index}">
+          ${q.replies.map(reply => `<div class="reply">${reply}</div>`).join('')}
+        </div>
+        <div class="reply-input" id="reply-input-${index}" style="display: none;">
+          <input type="text" id="reply-text-${index}" placeholder="Write your reply...">
+          <button onclick="addReply(${index})">Submit</button>
+        </div>
+      `;
+      questionsContainer.appendChild(questionDiv);
+    });
+  }
+
+  function askQuestion() {
+    const newQuestion = document.getElementById('new-question').value;
+    if (newQuestion.trim()) {
+      questions.push({ text: newQuestion, replies: [] });
+      document.getElementById('new-question').value = ''; // Clear input
+      renderQuestions();
+    }
+  }
+
+  function deleteQuestion(index) {
+    questions.splice(index, 1);
+    renderQuestions();
+  }
+
+  function toggleReply(index) {
+    const replyInput = document.getElementById(`reply-input-${index}`);
+    replyInput.style.display = replyInput.style.display === 'none' ? 'block' : 'none';
+  }
+
+  function addReply(index) {
+    const replyText = document.getElementById(`reply-text-${index}`).value;
+    if (replyText.trim()) {
+      questions[index].replies.push(replyText);
+      document.getElementById(`reply-text-${index}`).value = ''; // Clear input
+      renderQuestions();
+    }
+  }
+
+  // Initial rendering (if any questions exist)
+  renderQuestions();
+</script>
+
+</body>
+</html>

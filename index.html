@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>College Blog & Forum</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient background */
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin: 0;
+      color: #fff;
+      font-family: 'Ubuntu', sans-serif;
+      letter-spacing: 2px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 2rem;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.6); /* Semi-transparent background for the container */
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      font-family: 'Ubuntu', sans-serif;
+      font-weight: 700;
+    }
+
+    .section-content {
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+      color: #ddd;
+      line-height: 1.5;
+    }
+
+    .role-cards {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .role-card {
+      background: rgba(255, 255, 255, 0.8);
+      color: #343a40;
+      padding: 2rem;
+      text-align: center;
+      width: 30%;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .role-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .role-card i {
+      font-size: 3.5rem;
+      color: #2575fc;
+      margin-bottom: 1.5rem;
+    }
+
+    .role-card h4 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .role-card p {
+      font-size: 1.1rem;
+      color: #6c757d;
+      margin-bottom: 1.5rem;
+    }
+
+    .role-card a {
+      color: #2575fc;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      border: 2px solid #2575fc;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .role-card a:hover {
+      background-color: #2575fc;
+      color: #fff;
+    }
+
+    .btn-login {
+      background-color: #007bff;
+      padding: 1rem 2rem;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-login:hover {
+      background-color: #0056b3;
+    }
+
+  </style>
+</head>
+<body>
+
+<h1>🎓 Welcome to College Blog & Forum</h1>
+
+<div class="container">
+  <!-- Welcome Section -->
+  <h2 class="section-title">Explore the Community</h2>
+  <p class="section-content">Whether you're a student, a teacher, or part of the college administration, there's a place for you here. Join the conversation, share ideas, and connect with others!</p>
+
+  <!-- Key Sections for Different Roles -->
+  <div class="role-cards">
+    <!-- Student Card -->
+    <div class="role-card">
+      <i class="fa fa-graduation-cap"></i>
+      <h4>🎓 For Students</h4>
+      <p>Access study resources, exam prep materials, and connect with fellow students.</p>
+      <a href="student.html">Go to Student Section</a>
+    </div>
+
+    <!-- Teacher Card -->
+    <div class="role-card">
+      <i class="fa fa-chalkboard-teacher"></i>
+      <h4>👩‍🏫 For Teachers</h4>
+      <p>Upload resources, videos, and communicate with students effectively.</p>
+      <a href="teacher.html">Go to Teacher Section</a>
+    </div>
+
+    <!-- College Card -->
+    <div class="role-card">
+      <i class="fa fa-university"></i>
+      <h4>🏫 For College Administration</h4>
+      <p>Stay updated with campus life events, news, and FAQs for the college community.</p>
+      <a href="college.html">Go to College Section</a>
+    </div>
+  </div>
+
+  <div style="margin-top: 3rem;">
+    <a href="login.html" class="btn-login">Login to Your Account</a>
+  </div>
+</div>
+
+</body>
+</html>
